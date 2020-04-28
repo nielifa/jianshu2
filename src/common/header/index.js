@@ -1,7 +1,33 @@
 import React, { Component } from 'react'
-import {HeaderWrapper,Logo,Nav,NavItem,NavSearch,Addition,Button} from './style'
-export default class Header extends Component {
+import {HeaderWrapper,Logo,Nav,NavItem,NavSearch,Addition,Button,SearchWrapper,SearchInfo,SearchInfoTitle,SearchInfoSwitch,SearchInfoItem,SearchInfoList} from './style'
+import {connect} from 'react-redux'
+import {focusedIn,blurOut,getHeaderList,mouseEnter,mouseLeave} from './store/actions'
+class Header extends Component {
+    showInfo(){
+        let {focused,headerList,show,mouseEnter,mouseLeave}=this.props
+       if(focused || show){
+       return(<SearchInfo onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+        <SearchInfoTitle>
+             热门搜索
+             <SearchInfoSwitch>
+                 换一批
+             </SearchInfoSwitch>
+        </SearchInfoTitle>
+        <SearchInfoList>
+            {
+                headerList.map((value,index)=>{
+                return <SearchInfoItem key={index} >
+                          {value}
+                       </SearchInfoItem>
+                })
+            }
+        </SearchInfoList>
+    </SearchInfo>)
+       }
+    }
     render() {
+        let {focused,focusedIn,blurOut,getHeaderList}=this.props
+        let {showInfo} =this
         return (
             <div>
                 <HeaderWrapper>
@@ -13,8 +39,14 @@ export default class Header extends Component {
                         <NavItem className="right">
                             <i className="iconfont search">&#xe609;</i>
                         </NavItem>
-                        <NavSearch></NavSearch>
-                        <i className="iconfont zoom">&#xe6a8;</i>
+                        <SearchWrapper>
+                        <NavSearch 
+                        onFocus={()=>{focusedIn();getHeaderList()}} className={focused?"focused":"blur"}
+                        onBlur={()=>{blurOut()}}
+                        ></NavSearch>
+                        <i className="iconfont zoom" style={focused?{background:"#ccc"}:{}}>&#xe6a8;</i>
+                         {showInfo.call(this)}
+                        </SearchWrapper>
                         <Addition>
                             <Button className="writting">
                             <i className="iconfont pencil">&#xe605;</i>
@@ -28,3 +60,11 @@ export default class Header extends Component {
         )
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        focused: state.getIn(["reducerHeader","focused"]),
+        headerList:state.getIn(["reducerHeader","headerList"]),
+        show:state.getIn(["reducerHeader","show"])
+    }
+}
+export default connect(mapStateToProps,{focusedIn,blurOut,getHeaderList,mouseEnter,mouseLeave})(Header)

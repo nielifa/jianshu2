@@ -24,10 +24,6 @@ height:100%;
 padding-right:70px;
 box-sizing:border-box;
 margin:0 auto;
-position:relative;
-.zoom{
-    positon:absloute
-}
 `
 //按钮
 export const NavItem=styled.div`
@@ -49,6 +45,20 @@ color:#333;
 }
 `
 //搜索框
+export const SearchWrapper=styled.div`
+float:left;
+position:relative;
+.zoom{
+    position:absolute;
+    right:5px;
+    width:30px;
+    line-height:30px;
+    border-radius:15px;
+    bottom:5px;
+    text-align:center
+}
+
+`
 export const NavSearch=styled.input.attrs({
     placeholder:"搜索"
 })`
@@ -66,6 +76,14 @@ font-size:14px;
 &::placeholder{
 color:#999
 } 
+&.focused{
+    transition:all .2s ease-in;
+    width:240px
+}
+&.blur{
+    transition:all .2s ease-in;
+    width:160px
+}
 `
 //注册、写文章
 export const Addition=styled.div`
@@ -93,4 +111,39 @@ background:#ec6149
 .pencil{
     padding-right:5px;
 }
+`
+//热门搜索
+export const SearchInfo=styled.div`
+position:absolute;
+left:0;
+top:56px;
+width:240px;
+padding:0 20px;
+box-shadow:0 0 8px rgba(0,0,0,.2)
+`
+export const SearchInfoTitle=styled.div`
+margin-top:20px;
+margin-bottom:15px;
+line-height:20px;
+font-size:14px;
+color:#969696
+`
+export const SearchInfoSwitch=styled.div`
+float:right;
+font-size:13px
+`
+export const SearchInfoItem=styled.a`
+display:block;
+float:left;
+margin-right:10px;
+margin-bottom:10px;
+line-height:20px;
+padding:0 5px;
+font-size:12px;
+border:1px solid #ddd;
+color:#787878;
+border-radius:3px
+`
+export const SearchInfoList=styled.div`
+overflow:hidden
 `
