@@ -1,4 +1,4 @@
-import {FOCUSEDIN,BLUROUT,GETHEADERLIST,MOUSEENTER,MOUSELEAVE} from './constants'
+import {FOCUSEDIN,BLUROUT,GETHEADERLIST,MOUSEENTER,MOUSELEAVE,CHANGEPAGE} from './constants'
 import axios from 'axios'
 export const focusedIn=()=>{
     return {
@@ -30,5 +30,11 @@ export const mouseEnter=()=>{
 export const mouseLeave=()=>{
     return {
         type:MOUSELEAVE
+    }
+}
+export const changePage=(page)=>{
+    return {
+        type:CHANGEPAGE,
+        payload:page
     }
 }

@@ -1,0 +1,1 @@
+export const GETDETAILLIST="get_detaillist"

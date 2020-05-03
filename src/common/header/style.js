@@ -7,7 +7,7 @@ height:58px;
 border-bottom:1px solid #f0f0f0
 `
 //logo
-export const Logo=styled.a`
+export const Logo=styled.div`
 position:absolute;
 top:0;
 left:0;
@@ -117,9 +117,11 @@ export const SearchInfo=styled.div`
 position:absolute;
 left:0;
 top:56px;
+z-index:1;
 width:240px;
 padding:0 20px;
-box-shadow:0 0 8px rgba(0,0,0,.2)
+box-shadow:0 0 8px rgba(0,0,0,.2);
+background:#fff;
 `
 export const SearchInfoTitle=styled.div`
 margin-top:20px;
@@ -130,9 +132,17 @@ color:#969696
 `
 export const SearchInfoSwitch=styled.div`
 float:right;
-font-size:13px
+font-size:13px;
+.spin{
+    display:block;
+    float:left;
+    font-size:12px;
+    margin-right:2px;
+    transition:all .2s ease-in;
+    transform-origin:center center;
+}
 `
-export const SearchInfoItem=styled.a`
+export const SearchInfoItem=styled.div`
 display:block;
 float:left;
 margin-right:10px;
